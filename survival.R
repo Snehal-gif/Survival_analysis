@@ -1,11 +1,13 @@
 library(survival)
 library(survminer)
 library(stringr)
-data = read.csv("C:/Users/Admin/OneDrive/Documents/cancer genomics/pancancerInfo.csv")
-colnames(data)[10] = 'OS'
+data = read.csv("D:/Desktop/CB/BRCA.csv")
+head(data)
+colnames(data)[5] = 'cancer'
 
-fit=survfit(Surv(OS,Event)~gender,data=data)
+fit = survfit(Surv(cancer,Event)~ Gender,data=data)
 fit
+
 ggsurvplot(fit,data=data)
 ggsurvplot(fit,data=data,surv.median.line='hv')
 ggsurvplot(fit,data=data,surv.median.line='hv',pval = T)
@@ -13,11 +15,4 @@ ggsurvplot(fit,data=data,surv.median.line='hv',pval = T,risk.table = T)
 
 
 
-
-fit=survfit(Surv(OS,Event)~race + gender,data=data)
-fit
-ggsurvplot(fit,data=data)
-ggsurvplot(fit,data=data,surv.median.line='hv')
-ggsurvplot(fit,data=data,surv.median.line='hv',pval = T)
-ggsurvplot(fit,data=data,surv.median.line='hv',pval = T,risk.table = T)
 
